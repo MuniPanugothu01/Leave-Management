@@ -110,8 +110,6 @@
 //   const [leaveTypeFilter, setLeaveTypeFilter] = useState("");
 //   const [loading, setLoading] = useState(true);
 
-  
-  
 //   // Fetch Data from API
 //   useEffect(() => {
 //     fetch("http://localhost:3001/leaveRequest") // Replace with actual API URL
@@ -124,7 +122,7 @@
 //         //   console.error("Error fetching data:", result.message);
 //         // }
 //         console.log(result,'dfff');
-        
+
 //         setLoading(false);
 //       })
 //       .catch((error) => {
@@ -134,7 +132,7 @@
 //   }, []);
 
 //   console.log(data,'dd');
-  
+
 //   const handleAction = (id, status) => {
 //     fetch(`http://localhost:3001/leaveRequest/${id}`, {
 //       method: "POST",
@@ -235,9 +233,6 @@
 //   );
 // }
 
-
-
-
 import { useState, useEffect } from "react";
 
 export default function LeaveRequestComponent() {
@@ -248,17 +243,19 @@ export default function LeaveRequestComponent() {
 
   // Fetch Data from API
   useEffect(() => {
-    fetch("http://localhost:3001/leaveRequest") // ✅ Ensure this API is running
+    fetch("http://localhost:3001/leaveRequest")
       .then((response) => {
-        if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+        if (!response.ok)
+          throw new Error(`HTTP error! Status: ${response.status}`);
         return response.json();
       })
       .then((result) => {
-        setData(result); // ✅ Removed incorrect `result.data`
+        setData(Array.isArray(result) ? result : []); // Ensure result is always an array
         setLoading(false);
       })
       .catch((error) => {
         console.error("API Error:", error);
+        setData([]); // Set to an empty array in case of error
         setLoading(false);
       });
   }, []);
@@ -266,22 +263,27 @@ export default function LeaveRequestComponent() {
   // Function to handle accept/reject actions
   const handleAction = (id, status) => {
     fetch(`http://localhost:3001/leaveRequest/${id}`, {
-      method: "PATCH", // ✅ PATCH to update status
+      method: "PATCH",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ Status: status }), // ✅ Match field name in db.json
+      body: JSON.stringify({ Status: status }),
     })
       .then((response) => {
-        if (!response.ok) throw new Error(`HTTP Error! Status: ${response.status}`);
+        if (!response.ok)
+          throw new Error(`HTTP Error! Status: ${response.status}`);
         return response.json();
       })
       .then(() => {
-        window.location.reload(); // ✅ Force page reload after update
+        setData((prevData) =>
+          prevData.map((leave) =>
+            leave.LeaveID === id ? { ...leave, Status: status } : leave
+          )
+        );
       })
       .catch((error) => console.error("Error updating leave:", error));
   };
 
-  // Filter data based on user input
-  const filteredData = data.filter((item) => {
+  // Ensure `data` is an array before filtering
+  const filteredData = (Array.isArray(data) ? data : []).filter((item) => {
     return (
       (dateFilter === "" || item.FromDate === dateFilter) &&
       (leaveTypeFilter === "" || item.LeaveType === leaveTypeFilter)
@@ -326,7 +328,6 @@ export default function LeaveRequestComponent() {
             <th className="border p-2">Leave Type</th>
             <th className="border p-2">Reason</th>
             <th className="border p-2">Status</th>
-            <th className="border p-2">Action Type</th>
             <th className="border p-2">Action</th>
           </tr>
         </thead>
@@ -341,7 +342,6 @@ export default function LeaveRequestComponent() {
               <td className="border p-2">{item.LeaveType || "N/A"}</td>
               <td className="border p-2">{item.Reason}</td>
               <td className="border p-2">{item.Status}</td>
-              <td className="border p-2">{item.ActionType}</td>
               <td className="border p-2">
                 {item.Status === "Pending" && (
                   <>
