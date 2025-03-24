@@ -104,6 +104,10 @@ export default function LeaveRequestComponent() {
   const [dateFilter, setDateFilter] = useState("");
   const [leaveTypeFilter, setLeaveTypeFilter] = useState("");
 
+  console.log(data,'data form db.js');
+  console.log(leaveRequestsData,'muni');
+  
+  
   const handleAction = (id, status) => {
     setData((prevData) =>
       prevData.map((item) =>
