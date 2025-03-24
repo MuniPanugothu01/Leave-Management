@@ -1,4 +1,3 @@
-
 // import { useState } from "react";
 // import leaveRequestsData from "./db";
 
@@ -9,8 +8,7 @@
 
 //   console.log(data,'data form db.js');
 //   console.log(leaveRequestsData,'muni');
-  
-  
+
 //   const handleAction = (id, status) => {
 //     setData((prevData) =>
 //       prevData.map((item) =>
@@ -104,8 +102,6 @@
 //   );
 // }
 
-
-
 import { useState, useEffect } from "react";
 
 export default function LeaveRequestComponent() {
@@ -116,7 +112,7 @@ export default function LeaveRequestComponent() {
 
   // Fetch Data from API
   useEffect(() => {
-    fetch("https://example.com/api/leave-requests") // Replace with actual API URL
+    fetch("http://localhost:3001/leaveRequest") // Replace with actual API URL
       .then((response) => response.json())
       .then((result) => {
         if (result.status === "success") {
