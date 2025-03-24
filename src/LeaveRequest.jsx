@@ -1,3 +1,4 @@
+
 // import { useState } from "react";
 // import leaveRequestsData from "./db";
 
@@ -6,9 +7,10 @@
 //   const [dateFilter, setDateFilter] = useState("");
 //   const [leaveTypeFilter, setLeaveTypeFilter] = useState("");
 
-//   console.log(data, "data list from db.josn");
-//   console.log(leaveRequestsData, "muni");
-
+//   console.log(data,'data form db.js');
+//   console.log(leaveRequestsData,'muni');
+  
+  
 //   const handleAction = (id, status) => {
 //     setData((prevData) =>
 //       prevData.map((item) =>
@@ -20,8 +22,7 @@
 //   const filteredData = data.filter((item) => {
 //     return (
 //       (dateFilter === "" || item.FromDate === dateFilter) &&
-//       (leaveTypeFilter === "" ||
-//         item.LeaveType.toLowerCase().includes(leaveTypeFilter.toLowerCase()))
+//       (leaveTypeFilter === "" || item.LeaveType === leaveTypeFilter)
 //     );
 //   });
 
@@ -29,20 +30,27 @@
 //     <div className="p-4">
 //       <h2 className="text-xl font-bold mb-4">Leave Requests</h2>
 //       <div className="flex gap-4 mb-4">
+//         {/* Date Filter */}
 //         <input
 //           type="date"
 //           className="border p-2"
 //           value={dateFilter}
 //           onChange={(e) => setDateFilter(e.target.value)}
 //         />
-//         <input
-//           type="text"
-//           placeholder="Filter by Leave Type"
+
+//         {/* Dropdown for Leave Type Filter */}
+//         <select
 //           className="border p-2"
 //           value={leaveTypeFilter}
 //           onChange={(e) => setLeaveTypeFilter(e.target.value)}
-//         />
+//         >
+//           <option value="">All Leave Types</option>
+//           <option value="Casual Leave">Casual Leave</option>
+//           <option value="Paid Leave">Paid Leave</option>
+//           <option value="Unpaid Leave">Unpaid Leave</option>
+//         </select>
 //       </div>
+
 //       <table className="w-full border-collapse border">
 //         <thead>
 //           <tr className="bg-gray-200">
@@ -96,24 +104,49 @@
 //   );
 // }
 
-import { useState } from "react";
-import leaveRequestsData from "./db";
+
+
+import { useState, useEffect } from "react";
 
 export default function LeaveRequestComponent() {
-  const [data, setData] = useState(leaveRequestsData);
+  const [data, setData] = useState([]);
   const [dateFilter, setDateFilter] = useState("");
   const [leaveTypeFilter, setLeaveTypeFilter] = useState("");
+  const [loading, setLoading] = useState(true);
 
-  console.log(data,'data form db.js');
-  console.log(leaveRequestsData,'muni');
-  
-  
+  // Fetch Data from API
+  useEffect(() => {
+    fetch("https://example.com/api/leave-requests") // Replace with actual API URL
+      .then((response) => response.json())
+      .then((result) => {
+        if (result.status === "success") {
+          setData(result.data);
+        } else {
+          console.error("Error fetching data:", result.message);
+        }
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error("API Error:", error);
+        setLoading(false);
+      });
+  }, []);
+
   const handleAction = (id, status) => {
-    setData((prevData) =>
-      prevData.map((item) =>
-        item.LeaveID === id ? { ...item, Status: status } : item
-      )
-    );
+    fetch(`https://example.com/api/update-leave/${id}`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ status }),
+    })
+      .then((response) => response.json())
+      .then((result) => {
+        if (result.status === "success") {
+          window.location.reload(); // Refresh page after updating status
+        } else {
+          console.error("Update failed:", result.message);
+        }
+      })
+      .catch((error) => console.error("Error updating leave:", error));
   };
 
   const filteredData = data.filter((item) => {
@@ -123,19 +156,18 @@ export default function LeaveRequestComponent() {
     );
   });
 
+  if (loading) return <p>Loading leave requests...</p>;
+
   return (
     <div className="p-4">
       <h2 className="text-xl font-bold mb-4">Leave Requests</h2>
       <div className="flex gap-4 mb-4">
-        {/* Date Filter */}
         <input
           type="date"
           className="border p-2"
           value={dateFilter}
           onChange={(e) => setDateFilter(e.target.value)}
         />
-
-        {/* Dropdown for Leave Type Filter */}
         <select
           className="border p-2"
           value={leaveTypeFilter}
@@ -147,7 +179,6 @@ export default function LeaveRequestComponent() {
           <option value="Unpaid Leave">Unpaid Leave</option>
         </select>
       </div>
-
       <table className="w-full border-collapse border">
         <thead>
           <tr className="bg-gray-200">
