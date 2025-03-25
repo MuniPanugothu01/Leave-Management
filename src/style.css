@@ -70,3 +70,13 @@ th {
 .btn-reject:hover {
   background-color: darkred;
 }
+
+
+.leave-Request{
+    background-color: #0056b3;
+    border-radius: 10px;
+    height: 50px;
+    /* text-align: center; */
+    color: #f1f1f1f1;
+
+}
