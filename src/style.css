@@ -14,20 +14,18 @@ thead {
   background-color: #f4f4f4;
   color: #333;
 }
-
+th{
+    background-color: #0056b3;
+}
+.btn-accept{
+background-color: red;
+}
 /* Table Rows */
-tbody tr {
-  background-color: #0056b3; /* Row Background */
-  color: white;
-}
 
-tbody tr:nth-child(even) {
-  background-color: #004494; /* Alternate Row Color */
-}
 
 /* Hover Effect */
 tbody tr:hover {
-  background-color: #003366;
+  background-color: #d5d7d8;
 }
 
 /* Table Cells */
