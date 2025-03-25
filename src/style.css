@@ -9,7 +9,6 @@ table {
   overflow: hidden;
 }
 
-/* Table Headers */
 thead {
   background-color: #f4f4f4;
   color: #333;
@@ -21,22 +20,17 @@ th{
 .btn-accept{
 background-color: red;
 }
-/* Table Rows */
-
-
-/* Hover Effect */
 tbody tr:hover {
   background-color: #d5d7d8;
 }
 
-/* Table Cells */
 td,
 th {
   padding: 10px;
   text-align: left;
 }
 
-/* Status Text */
+
 .status-accepted {
   color: green;
   font-weight: bold;
@@ -52,7 +46,6 @@ th {
   font-weight: bold;
 }
 
-/* Action Buttons */
 .btn {
   padding: 5px 10px;
   border: none;

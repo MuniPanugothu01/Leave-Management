@@ -342,7 +342,7 @@ export default function LeaveRequestComponent() {
 
   return (
     <div className="p-4">
-      <h2 className="text-xl font-bold mb-4">Leave Requests</h2>
+      <h2 className="text-xl font-bold mb-4" >Leave Requests</h2>
 
       {/* Filters */}
       <div className="flex gap-4 mb-4">
