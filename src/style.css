@@ -1,6 +1,6 @@
-/* styles.css */
-
-/* Table Styling */
+body{
+    font-family: 'Times New Roman', Times, serif;
+}
 table {
   width: 100%;
   border-collapse: collapse;
@@ -16,6 +16,7 @@ thead {
 }
 th{
     background-color: #0056b3;
+    color: #f1f1f1f1;
 }
 .btn-accept{
 background-color: red;
