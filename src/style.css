@@ -1,5 +1,5 @@
-body{
-    font-family: 'Times New Roman', Times, serif;
+body {
+  font-family: "Times New Roman", Times, serif;
 }
 table {
   width: 100%;
@@ -13,12 +13,12 @@ thead {
   background-color: #f4f4f4;
   color: #333;
 }
-th{
-    background-color: #0056b3;
-    color: #f1f1f1f1;
+th {
+  background-color: #0056b3;
+  color: #f1f1f1f1;
 }
-.btn-accept{
-background-color: red;
+.btn-accept {
+  background-color: red;
 }
 tbody tr:hover {
   background-color: #d5d7d8;
@@ -29,7 +29,6 @@ th {
   padding: 10px;
   text-align: left;
 }
-
 
 .status-accepted {
   color: green;
@@ -71,12 +70,15 @@ th {
   background-color: darkred;
 }
 
+.leave-Request {
+  background-color: #0056b3;
+  border-radius: 10px;
+  height: 50px;
+  /* text-align: center; */
+  color: #f1f1f1f1;
+}
 
-.leave-Request{
-    background-color: #0056b3;
-    border-radius: 10px;
-    height: 50px;
-    /* text-align: center; */
-    color: #f1f1f1f1;
-
+.border {
+  margin-left: 20px;
+  border-radius: 5px;
 }
