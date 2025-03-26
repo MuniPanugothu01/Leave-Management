@@ -218,6 +218,7 @@ export default function LeaveRequestComponent() {
       <div className="flex gap-4 mb-4">
         <input
           type="date"
+          style={{borderRadius:'5px'}}
           className="border p-2"
           value={dateFilter}
           onChange={(e) => setDateFilter(e.target.value)}
