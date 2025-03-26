@@ -16,6 +16,12 @@ thead {
 th {
   background-color: #0056b3;
   color: #f1f1f1f1;
+  font-family: 'Times New Roman', Times, serif;
+  font-size: large;
+}
+tr{
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 17px;
 }
 .btn-accept {
   background-color: red;
