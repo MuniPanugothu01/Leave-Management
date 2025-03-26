@@ -16,11 +16,11 @@ thead {
 th {
   background-color: #0056b3;
   color: #f1f1f1f1;
-  font-family: 'Times New Roman', Times, serif;
+  font-family: "Times New Roman", Times, serif;
   font-size: large;
 }
-tr{
-  font-family: 'Times New Roman', Times, serif;
+tr {
+  font-family: "Times New Roman", Times, serif;
   font-size: 17px;
 }
 .btn-accept {
@@ -28,6 +28,7 @@ tr{
 }
 tbody tr:hover {
   background-color: #d5d7d8;
+  
 }
 
 td,
@@ -82,8 +83,7 @@ th {
   height: 50px;
   /* text-align: center; */
   color: #f1f1f1f1;
-  font-family: 'Times New Roman', Times, serif;
-   
+  font-family: "Times New Roman", Times, serif;
 }
 
 .border {
@@ -91,5 +91,4 @@ th {
   border-radius: 5px;
   font-size: 15px;
   font-family: "Times New Roman", Times, serif;
- 
 }
