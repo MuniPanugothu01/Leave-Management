@@ -76,9 +76,14 @@ th {
   height: 50px;
   /* text-align: center; */
   color: #f1f1f1f1;
+  font-family: 'Times New Roman', Times, serif;
+   
 }
 
 .border {
   margin-left: 20px;
   border-radius: 5px;
+  font-size: 15px;
+  font-family: "Times New Roman", Times, serif;
+ 
 }
